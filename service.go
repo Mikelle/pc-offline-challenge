@@ -14,7 +14,8 @@ func NewService() *Service {
 		0.1,
 	)
 
+	wt := NewTranslatorWrapper(t)
 	return &Service{
-		translator: t,
+		translator: wt,
 	}
 }
