@@ -1,6 +1,10 @@
 package main
 
-import "time"
+import (
+	"time"
+
+	"github.com/patrickmn/go-cache"
+)
 
 // Service is a Translator user.
 type Service struct {
@@ -14,7 +18,9 @@ func NewService() *Service {
 		0.1,
 	)
 
-	wt := NewTranslatorWrapper(t)
+	c := cache.New(5 * time.Minute, 10 * time.Minute)
+
+	wt := NewTranslatorWrapper(t, c)
 	return &Service{
 		translator: wt,
 	}
