@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/patrickmn/go-cache"
+	"golang.org/x/sync/singleflight"
 )
 
 // Service is a Translator user.
@@ -20,7 +21,9 @@ func NewService() *Service {
 
 	c := cache.New(5 * time.Minute, 10 * time.Minute)
 
-	wt := NewTranslatorWrapper(t, c)
+	var rg singleflight.Group
+
+	wt := NewTranslatorWrapper(t, c, &rg)
 	return &Service{
 		translator: wt,
 	}
