@@ -1,0 +1,11 @@
+### Intellij ###
+.idea
+
+# VS Code
+.vscode/
+
+# Exuberant ctags (vim)
+tags
+
+vendor
+.DS_Store
